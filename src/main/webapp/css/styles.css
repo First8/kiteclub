@@ -1,0 +1,87 @@
+body {
+	margin: 0;
+	background: url(../images/background-21027_1920-white.jpg) no-repeat top right;
+}
+
+img.brand-image {
+	width: 64px;
+}
+
+div.container {
+	margin-top: 60px;
+}
+
+.box {
+	box-sizing: border-box;
+	background: rgba(255, 153, 0, 0.5) none repeat scroll 0 0;
+	border: 5px solid #ffffff;
+	border-radius: 10px;
+}
+
+.user {
+}
+
+.menu {
+	padding: 10px;
+	margin: 10% 10%;
+	font-size: 30px;
+}
+
+.menu h2 {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.httpoError {
+	font-size: 30px;
+}
+
+.httpoError h1 {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.myKite {
+	padding: 10px;
+	text-align: left;
+}
+
+.admin {
+	padding: 10px;
+	text-align: left;
+}
+
+table.quadcopters {
+	width: 100%;
+}
+
+table.quadcopters th {
+	vertical-align: top;
+	padding-top: 8px;
+	padding-left: 8px;
+	padding-bottom: 8px;
+}
+
+table.quadcopters td {
+	vertical-align: top;
+	padding-top: 8px;
+	padding-left: 8px;
+}
+
+table.quadcopters td.image {
+	text-align: center;
+}
+
+table.quadcopters.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #898989;
+}
+
+table.quadcopters.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: #a9a9a9;
+}
+
+img.quadcopter {
+	width: 85px;
+	max-height: 85px;
+	padding: 8px;
+}
