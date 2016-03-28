@@ -10,3 +10,52 @@ Steps to setup:
 * change ':0' into ':500'
 * now you can start the server using either Eclipse (add a server) or manually by using ./bin/standalone.sh in the WildFly-home-dir
 
+## Starting keycloak
+Steps to setup:
+
+* download Keycloak 1.9.1
+* extract it
+* start it using ./bin/standalone.sh
+* visit http://localhost:8080/auth
+* add admin-user as requested
+* visit the admin-page from the main page (http://localhost:8080/auth/admin/)
+* Add a realm
+* select the file 'keycloak-realm.json' for import
+* select 'Create'
+
+## Adding Keycloak adapter
+Steps to setup:
+
+* download the adapter for WildFly (keycloak-wildfly-adapter-dist-1.9.1.Final.tar.gz)
+* extract it in the WildFly dir created above
+* add the items mentioned in the manual (8.2.1. Adapter Installation) to you ./standalone/configuration/standalone.xml
+
+```xml
+<server xmlns="urn:jboss:domain:1.4">
+
+    <extensions>
+        <extension module="org.keycloak.keycloak-adapter-subsystem"/>
+          ...
+    </extensions>
+
+    <profile>
+        <subsystem xmlns="urn:jboss:domain:keycloak:1.1"/>
+         ...
+    </profile>
+
+    <subsystem xmlns="urn:jboss:domain:security:1.2">
+       <security-domains>
+         ...
+         <security-domain name="keycloak">
+            <authentication>
+              <login-module code="org.keycloak.adapters.jboss.KeycloakLoginModule"
+                            flag="required"/>
+             </authentication>
+         </security-domain>
+       </security-domains>
+```
+
+*Note*: the cli-scripts have not worked for me.
+
+## REST-API
+Check that the REST-API is still accesable: http://localhost:8580/kiteclub/rest/kites should yield nice json.

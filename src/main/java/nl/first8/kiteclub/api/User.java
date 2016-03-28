@@ -24,6 +24,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.keycloak.KeycloakPrincipal;
+import org.keycloak.KeycloakSecurityContext;
+import org.keycloak.adapters.AdapterDeploymentContext;
+import org.keycloak.adapters.KeycloakDeployment;
+import org.keycloak.representations.AccessToken;
+
 @Stateless
 @Path("/user")
 public class User implements Serializable {
@@ -48,6 +54,10 @@ public class User implements Serializable {
 	}
 
 	private SessionInfo getSessionInfo(ServletContext servletContext) {
+		@SuppressWarnings("unchecked")
+		KeycloakPrincipal<KeycloakSecurityContext> p = (KeycloakPrincipal<KeycloakSecurityContext>) ctx
+				.getCallerPrincipal();
+		AccessToken token = p.getKeycloakSecurityContext().getToken();
 		// TODO: add user info
 		SessionInfo sessionInfo = new SessionInfo(//
 				servletRequest.getContextPath(), //
@@ -91,7 +101,7 @@ public class User implements Serializable {
 			if (session != null) {
 				session.invalidate();
 			}
-			return Response.temporaryRedirect(new URI(getLogoutLocation(servletContext))).build();
+			return Response.temporaryRedirect(new URI(getTargetUri(servletContext))).build();
 		} catch (URISyntaxException | ServletException e) {
 			LOG.log(Level.WARNING, "Could not logout", e);
 		}
@@ -101,22 +111,13 @@ public class User implements Serializable {
 	public String getAccountUrl(@Context ServletContext servletContext) {
 		String targetUri = getTargetUri(servletContext);
 
-			return String.format(
-				"%s/realms/%s/account/" //
-						+ "?referrer=%s", //
-				"deployment.getAuthServerBaseUrl()", //
-				"deployment.getRealm()", //
-				targetUri);
-	}
-
-	private String getLogoutLocation(ServletContext servletContext) {
-		String targetUri = getTargetUri(servletContext);
+		KeycloakDeployment deployment = getDeployment(servletContext);
 
 		return String.format(
-				"%s/realms/%s/tokens/logout" //
-						+ "?redirect_uri=%s", //
-				"deployment.getAuthServerBaseUrl()", //
-				"deployment.getRealm()", //
+				"%s/realms/%s/account/" //
+						+ "?referrer=%s", //
+				deployment.getAuthServerBaseUrl(), //
+				deployment.getRealm(), //
 				targetUri);
 	}
 
@@ -127,5 +128,12 @@ public class User implements Serializable {
 			return targetUri;
 		}
 		return "http://localhost:8580/kiteclub";
+	}
+
+	private KeycloakDeployment getDeployment(ServletContext servletContext) {
+		AdapterDeploymentContext deploymentContext = (AdapterDeploymentContext) servletContext
+				.getAttribute(AdapterDeploymentContext.class.getName());
+
+		return deploymentContext.resolveDeployment(null);
 	}
 }

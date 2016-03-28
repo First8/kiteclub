@@ -1,0 +1,10 @@
+{
+  "realm": "J-Fall-2015",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvfb0kVdO1pLVR/KMY7M6Uc8XZNqxaKFwvkbwuuqThWYKIP/hZDfJfFH8iMM4NWonBT6U+CgoHQj+OfJmP1rHJ1JuZxgTXKkC26ZsM6XBWFpb5/9mVsBoSqq+zliTw3JWvTAbix3vxpQqZrKFBjjuHHsdH34rvIObXglAoK5qMte7a3L4sTsDkzoATXiL9yu1gsHSyXqd42sxLiyLO7D9sSSALBHkAOpJuwasWRTMhqId+tAMJznEP0xUhRJMOKDnt6TEYOCOj7vYdL5e6WwCZPx2njFm3ZgarGTwCojW41L5+fG21PnAczOyNnGp0GMhLLOhqSFTCYeqYmADcz1IAwIDAQAB",
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
+  "resource": "kiteclub",
+  "credentials": {
+    "secret": "740232f8-f22b-4d59-be76-b77e13622e55"
+  }
+}
