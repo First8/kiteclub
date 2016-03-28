@@ -3,6 +3,7 @@ package nl.first8.kiteclub.api;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class KiteService {
 
 	@GET
 	@Produces("application/json")
-	// TODO: add role
+	@RolesAllowed({ "Admin" })
 	public Response all() {
 		return Response.status(200).entity(kiteDao.all()).build();
 	}
@@ -39,7 +40,7 @@ public class KiteService {
 	@GET
 	@Produces("application/json")
 	@Path("/{id}")
-	// TODO: add role
+	@RolesAllowed({ "Member" })
 	public Response get(@PathParam("id") int id) {
 		Kite kite = kiteDao.get(id);
 		if (kite == null) {
@@ -52,7 +53,7 @@ public class KiteService {
 	@GET
 	@Produces("application/json")
 	@Path("/mine")
-	// TODO: add role
+	@RolesAllowed({ "Member" })
 	public Response getMine() {
 		return Response.status(200).entity(kiteDao.getByOwner(getEmployeeNumber())).build();
 	}
