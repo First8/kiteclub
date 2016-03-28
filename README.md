@@ -59,3 +59,7 @@ Steps to setup:
 
 ## REST-API
 Check that the REST-API is still accesable: http://localhost:8580/kiteclub/rest/kites should yield nice json.
+
+## Theme
+The article speaks about the theme. Due to an upgrade of Keycloak (from 1.6.0 to 1.9.1) the themes dir hase been moved from ‘standalone/configuration/themes’ to ‘themes’.
+The theme can be set in the admin page http://localhost:8080/auth/admin/master/console/#/realms/J-Fall-2015/theme-settings.
