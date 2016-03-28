@@ -4,7 +4,7 @@ Example application for using Keycloak
 ## Setup WildFly 10.0.0.Final
 Steps to setup:
 
-* Download the tar.gz/zip
+* Download the tar.gz / zip
 * extract it
 * find the line containing 'port-offset="${jboss.socket.binding.port-offset:0}"'
 * change ':0' into ':500'
@@ -63,3 +63,23 @@ Check that the REST-API is still accesable: http://localhost:8580/kiteclub/rest/
 ## Theme
 The article speaks about the theme. Due to an upgrade of Keycloak (from 1.6.0 to 1.9.1) the themes dir hase been moved from ‘standalone/configuration/themes’ to ‘themes’.
 The theme can be set in the admin page http://localhost:8080/auth/admin/master/console/#/realms/J-Fall-2015/theme-settings.
+
+## LDAP-server opzetten
+*Note*: in the article steps are given to start the ApacheDS LDAP-server using docker. These are hard to copy. Here are the steps in a copyable fashion:
+
+```bash
+docker run \
+    -e "DOMAIN_NAME=first8" \
+    -e "DOMAIN_SUFFIX=nl" \
+    --name apacheds -d -p 10389:10389 \
+    -v /path/to/first8.nl.ldif:/tmp/first8.nl.ldif:ro \
+    jjhughes57/apacheds-docker
+
+docker exec -i -t apacheds bash
+
+ldapmodify -c -a \
+    -f /tmp/first8.nl.ldif \
+    -h localhost -p 10389 \
+    -D "uid=admin,ou=system" -w secret
+```
+

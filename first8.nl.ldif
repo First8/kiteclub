@@ -1,0 +1,56 @@
+version: 1
+
+dn: ou=People,dc=first8,dc=nl
+objectclass: top
+objectclass: organizationalUnit
+ou: People
+
+dn: uid=admin,ou=People,dc=first8,dc=nl
+objectclass: top
+objectclass: uidObject
+objectclass: person
+cn: Manager
+sn: Manager
+uid: admin
+userPassword:: e1NTSEF9UEh6cDVyK2o0ckRhZVoxa3AyNzZGQ2JXN0tid1dKNktKSjNJd2c9P
+ Q==
+
+dn: uid=joep,ou=People,dc=first8,dc=nl
+objectclass: top
+objectclass: uidObject
+objectclass: person
+cn: Joep
+sn: Hoelahoep
+uid: joep
+userPassword:: e1NTSEF9UEh6cDVyK2o0ckRhZVoxa3AyNzZGQ2JXN0tid1dKNktKSjNJd2c9P
+ Q==
+
+dn: uid=piet,ou=People,dc=first8,dc=nl
+objectclass: top
+objectclass: uidObject
+objectclass: person
+cn: Piet
+sn: Weetniet
+uid: piet
+userPassword:: e1NTSEF9UEh6cDVyK2o0ckRhZVoxa3AyNzZGQ2JXN0tid1dKNktKSjNJd2c9P
+ Q==
+
+dn: ou=Roles,dc=first8,dc=nl
+objectclass: top
+objectclass: organizationalUnit
+ou: Roles
+
+dn: cn=Admins,ou=Roles,dc=first8,dc=nl
+objectClass: top
+objectClass: groupOfNames
+cn: Admins
+member: uid=admin,ou=People,dc=first8,dc=nl
+description: The administrators group
+
+dn: cn=Users,ou=Roles,dc=first8,dc=nl
+objectClass: top
+objectClass: groupOfNames
+cn: Users
+member: uid=joep,ou=People,dc=first8,dc=nl
+member: uid=piet,ou=People,dc=first8,dc=nl
+description: The group to hold other people
