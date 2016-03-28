@@ -27,7 +27,7 @@
 			<% if (request.getRemoteUser() != null) {  %>
 				<ul class="nav navbar-nav navbar-right">
 					<% if (!"yes".equalsIgnoreCase(request.getParameter("hideUserInfo"))) {  %>
-						<!-- TODO: add user info -->
+						<li><a href="${pageContext.request.contextPath}/my-kites.jsp">{{sessionInfo.username}}</a></li>
 						<li><a href="{{sessionInfo.accountUrl}}" target="_blank">Account</a></li>
 						<li role="separator" class="divider"></li>
 					<% } %>

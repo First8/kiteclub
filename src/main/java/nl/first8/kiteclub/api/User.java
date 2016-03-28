@@ -30,6 +30,8 @@ import org.keycloak.adapters.AdapterDeploymentContext;
 import org.keycloak.adapters.KeycloakDeployment;
 import org.keycloak.representations.AccessToken;
 
+import com.google.common.base.Joiner;
+
 @Stateless
 @Path("/user")
 public class User implements Serializable {
@@ -58,10 +60,11 @@ public class User implements Serializable {
 		KeycloakPrincipal<KeycloakSecurityContext> p = (KeycloakPrincipal<KeycloakSecurityContext>) ctx
 				.getCallerPrincipal();
 		AccessToken token = p.getKeycloakSecurityContext().getToken();
-		// TODO: add user info
+		// Pick the details from the token/jwt
+		String fullName = Joiner.on(" ").join(token.getGivenName(), token.getFamilyName());
 		SessionInfo sessionInfo = new SessionInfo(//
 				servletRequest.getContextPath(), //
-				null, // fullName
+				fullName, //
 				null, // nickname
 				getAccountUrl(servletContext));
 		return sessionInfo;
