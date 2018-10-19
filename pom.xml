@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<keycloak.version>1.9.1.Final</keycloak.version>
+		<keycloak.version>3.4.2.Final</keycloak.version>
 	</properties>
 	<dependencies>
 		<dependency>
